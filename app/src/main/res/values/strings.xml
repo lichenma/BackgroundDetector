@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Background Detector</string>
+    <string name="random_number_generator_text">Random-Number Generator!</string>
+    <string name="random_heading">Random Number Between \n 0 - %1d</string>
+</resources>
