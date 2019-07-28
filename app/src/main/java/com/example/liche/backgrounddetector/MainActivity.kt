@@ -39,4 +39,15 @@ class MainActivity : AppCompatActivity() {
         randomIntent.putExtra(TOTAL_COUNT, count);
         startActivity(randomIntent)
     }
+
+    public fun resetMe(view: View) {
+        var defaultTextView:TextView = findViewById(R.id.randomNumber) as TextView;
+        defaultTextView.setText("Default Text");
+
+    }
+
+    public fun changeMe(view: View){
+        var defaultTextView: TextView = findViewById(R.id.randomNumber) as TextView;
+        defaultTextView.setText("You Have Left the App");
+    }
 }
