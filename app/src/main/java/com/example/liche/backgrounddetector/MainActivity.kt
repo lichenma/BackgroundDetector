@@ -6,13 +6,23 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import android.app.Application
+import android.arch.lifecycle.*
+import android.content.Context
+import dagger.android.AndroidInjection
+import javax.*;
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var appLifecycleObserver: AppLifecycleObserver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
+
     /**
      * Show a toast
      * @param view - the view that is clicked
@@ -51,3 +61,5 @@ class MainActivity : AppCompatActivity() {
         defaultTextView.setText("You Have Left the App");
     }
 }
+
+

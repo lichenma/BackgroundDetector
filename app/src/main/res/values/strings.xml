@@ -2,4 +2,7 @@
     <string name="app_name">Background Detector</string>
     <string name="random_number_generator_text">Background Detector!</string>
     <string name="random_heading">Random Number Between \n 0 - %1d</string>
+    <string name="foreground_message">Welcome to the app!</string>
+    <string name="background_message">Thank you come again!</string>
+
 </resources>

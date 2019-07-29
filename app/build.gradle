@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     defaultConfig {
@@ -20,9 +22,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    kapt{
+        generateStubs = true
+    }
 }
 
 dependencies {
+    //implementation group: 'android.arch.lifecycle', name: 'ProcessLifecycleOwner', version:'1.0.0'
+    implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.+'
@@ -30,4 +37,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
+    compileOnly 'com.google.dagger:dagger:2.12'
+    kapt 'com.google.dagger:dagger-compiler:2.12'
+    implementation 'com.google.dagger:dagger-android:2.12'
+    kapt 'com.google.dagger:dagger-android-processor:2.12'
+
 }
