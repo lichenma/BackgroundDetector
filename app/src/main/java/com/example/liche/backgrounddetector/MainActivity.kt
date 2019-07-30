@@ -12,6 +12,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
 import android.support.v4.content.ContextCompat.startActivity
+import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
 import dagger.android.AndroidInjection
 import javax.*;
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             } else if (intent.getStringExtra("data")=="BACKGROUND") {
                 var defaultTextView: TextView = findViewById(R.id.randomNumber) as TextView;
                 defaultTextView.setText("You Have Left the App");
-                Log.d("we got here", "hello")
+                Log.d("we  got here", "hello")
             }
         }
     }
@@ -42,7 +43,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         appLifecycleObserver = AppLifecycleObserver(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(appLifecycleObserver)
-        registerReceiver(listener, IntentFilter("SEND_BACKGROUND"))
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(listener, IntentFilter("SEND_BACKGROUND"))
     }
 
     /**
