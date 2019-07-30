@@ -10,6 +10,8 @@ class App : Application() {
     @Inject
     lateinit var appLifecycleObserver: AppLifecycleObserver
 
+
+
     override fun onCreate() {
         super.onCreate()
 

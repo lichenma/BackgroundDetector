@@ -8,7 +8,11 @@ import android.widget.TextView
 import android.widget.Toast
 import android.app.Application
 import android.arch.lifecycle.*
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.IntentFilter
+import android.support.v4.content.ContextCompat.startActivity
+import android.util.Log
 import dagger.android.AndroidInjection
 import javax.*;
 import javax.inject.Inject
@@ -17,11 +21,29 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var appLifecycleObserver: AppLifecycleObserver
 
+
+    var listener = object: BroadcastReceiver(){
+        override fun onReceive(context:Context, intent:Intent){
+            if (intent.getStringExtra("data")=="FOREGROUND"){
+                //var defaultTextView:TextView = findViewById(R.id.randomNumber) as TextView;
+                //defaultTextView.setText("Default Text");
+                Log.d("we got here", "hello")
+            } else if (intent.getStringExtra("data")=="BACKGROUND") {
+                var defaultTextView: TextView = findViewById(R.id.randomNumber) as TextView;
+                defaultTextView.setText("You Have Left the App");
+                Log.d("we got here", "hello")
+            }
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        appLifecycleObserver = AppLifecycleObserver(this)
+        ProcessLifecycleOwner.get().lifecycle.addObserver(appLifecycleObserver)
+        registerReceiver(listener, IntentFilter("SEND_BACKGROUND"))
     }
-
 
     /**
      * Show a toast
@@ -49,7 +71,6 @@ class MainActivity : AppCompatActivity() {
         randomIntent.putExtra(TOTAL_COUNT, count);
         startActivity(randomIntent)
     }
-
     public fun resetMe(view: View) {
         var defaultTextView:TextView = findViewById(R.id.randomNumber) as TextView;
         defaultTextView.setText("Default Text");

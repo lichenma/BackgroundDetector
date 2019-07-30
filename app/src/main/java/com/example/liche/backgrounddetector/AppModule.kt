@@ -13,4 +13,8 @@ class AppModule {
     fun provideContext(application: Application): Context {
         return application;
     }
+    @Provides
+    fun provideMainActivity(application: Application): MainActivity {
+        return MainActivity()
+    }
 }
